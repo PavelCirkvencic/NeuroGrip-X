@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "purpose": "Mixed high-speed excitation and closed-loop domain training with disjoint closed-loop validation/calibration.",
+  "splits": {
+    "train": [
+      "gripid_train_nominal_seed0701",
+      "gripid_train_balanced_low_seed0702",
+      "gripid_train_front_soft_seed0703",
+      "gripid_train_rear_soft_seed0704",
+      "gripid_train_front_transition_seed0705",
+      "gripid_train_rear_transition_seed0706",
+      "gripdev_trackdrive_nominal_seed0751::C1_ORACLE_MU",
+      "gripdev_trackdrive_front_split_seed0752::C1_ORACLE_MU",
+      "gripdev_trackdrive_rear_split_seed0753::C1_ORACLE_MU"
+    ],
+    "validation": ["gripval_trackdrive_front_split_seed0771::C1_ORACLE_MU"],
+    "calibration": ["gripcal_trackdrive_rear_split_seed0781::C1_ORACLE_MU"]
+  }
+}

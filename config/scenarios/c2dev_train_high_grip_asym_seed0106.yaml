@@ -1,0 +1,19 @@
+schema_version: 1
+scenario_id: c2dev_train_high_grip_asym_seed0106
+seed: 106
+track: small_track
+base_vehicle:
+  mass_scale: 1.10
+  inertia_scale: 1.05
+  pacejka_A_scale: 1.08
+  pacejka_B_scale: 1.04
+  pacejka_C_scale: 1.03
+actuator:
+  steering_gain: 0.94
+  steering_delay_s: 0.075
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.78
+    rear_scale: 1.05
+sensors:
+  imu_noise_profile: nominal_v1

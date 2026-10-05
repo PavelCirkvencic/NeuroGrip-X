@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "description": "Final sealed OOD test. These scenarios are never used for fitting, early stopping, architecture selection or calibration; they are evaluated only by the final benchmark.",
+  "scenario_ids": [
+    "actuated_low_grip_seed0023",
+    "imu_noise_v2_seed0062",
+    "mass_shifted_seed0034",
+    "transitioning_grip_seed0044"
+  ],
+  "sealed_at_utc": "2026-09-24T19:11:00Z",
+  "sealed_git_commit": "49665378cb7433caf34fed923f4d0846ce61c8c0"
+}

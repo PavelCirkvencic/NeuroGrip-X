@@ -1,0 +1,94 @@
+# Reproducible Gazebo-native dynamic regimes for NeuroGrip-X.
+# Values are simulator scenario parameters, not claims about a real tyre.
+profiles:
+  nominal:
+    description: Near-ideal reference condition for controller and pipeline debugging.
+    friction_scale_range: [0.95, 1.05]
+    front_lateral_compliance_range: [0.005, 0.015]
+    rear_lateral_compliance_range: [0.005, 0.015]
+    longitudinal_compliance_range: [0.001, 0.008]
+
+  low_grip:
+    description: Uniformly reduced-grip condition with observable lateral slip.
+    friction_scale_range: [0.70, 0.82]
+    front_lateral_compliance_range: [0.10, 0.16]
+    rear_lateral_compliance_range: [0.10, 0.16]
+    longitudinal_compliance_range: [0.020, 0.050]
+
+  front_limited:
+    description: Front axle loses lateral authority before the rear axle.
+    friction_scale_range: [0.76, 0.88]
+    front_lateral_compliance_range: [0.16, 0.24]
+    rear_lateral_compliance_range: [0.035, 0.075]
+    longitudinal_compliance_range: [0.015, 0.040]
+
+  rear_limited:
+    description: Rear axle has reduced lateral authority for a harder yaw-dynamics regime.
+    friction_scale_range: [0.76, 0.88]
+    front_lateral_compliance_range: [0.035, 0.075]
+    rear_lateral_compliance_range: [0.16, 0.24]
+    longitudinal_compliance_range: [0.015, 0.040]
+
+  # Phase 2 actuator regimes.  The hidden steering delay/gain is applied by
+  # command_guard from the manifest and is never published as a scenario label.
+  actuated_grip:
+    description: Moderate grip with a hidden steering actuator delay and gain.
+    friction_scale_range: [0.78, 0.92]
+    front_lateral_compliance_range: [0.06, 0.13]
+    rear_lateral_compliance_range: [0.06, 0.13]
+    longitudinal_compliance_range: [0.010, 0.030]
+    steering_delay_s_range: [0.02, 0.08]
+    steering_gain_range: [0.85, 1.15]
+
+  actuated_low_grip:
+    description: Low grip with a larger hidden steering actuator delay and gain.
+    friction_scale_range: [0.68, 0.80]
+    front_lateral_compliance_range: [0.10, 0.16]
+    rear_lateral_compliance_range: [0.10, 0.16]
+    longitudinal_compliance_range: [0.020, 0.050]
+    steering_delay_s_range: [0.03, 0.09]
+    steering_gain_range: [0.85, 1.15]
+
+  mass_shifted:
+    description: Moderate grip with hidden mass and centre-of-gravity variation.
+    friction_scale_range: [0.80, 0.94]
+    front_lateral_compliance_range: [0.06, 0.13]
+    rear_lateral_compliance_range: [0.06, 0.13]
+    longitudinal_compliance_range: [0.010, 0.030]
+    mass_scale_range: [0.92, 1.10]
+    cg_shift_m_range: [-0.04, 0.06]
+
+  transitioning_grip:
+    description: Global grip drops partway through the run, unlabelled.
+    friction_scale_range: [0.82, 0.95]
+    front_lateral_compliance_range: [0.05, 0.10]
+    rear_lateral_compliance_range: [0.05, 0.10]
+    longitudinal_compliance_range: [0.008, 0.020]
+    grip_transition:
+      start_s_range: [12.0, 20.0]
+      compliance_scale_range: [1.5, 3.0]
+
+  # Legacy isotropic IMU model kept byte-for-byte reproducible for the runs
+  # recorded with it.  New episodes should use ``imu_noise_v2``.
+  noisy_sensors:
+    description: Moderate grip measured through a noisy, dropping IMU (legacy scale).
+    friction_scale_range: [0.80, 0.94]
+    front_lateral_compliance_range: [0.05, 0.12]
+    rear_lateral_compliance_range: [0.05, 0.12]
+    longitudinal_compliance_range: [0.010, 0.030]
+    imu_noise:
+      stddev_range: [0.02, 0.08]
+      dropout_probability_range: [0.0, 0.05]
+
+  imu_noise_v2:
+    description: Moderate grip with per-unit IMU noise, bias, random walk and dropout.
+    friction_scale_range: [0.80, 0.94]
+    front_lateral_compliance_range: [0.05, 0.12]
+    rear_lateral_compliance_range: [0.05, 0.12]
+    longitudinal_compliance_range: [0.010, 0.030]
+    imu_noise:
+      angular_velocity_stddev_rps_range: [0.01, 0.05]
+      linear_acceleration_stddev_mps2_range: [0.10, 0.50]
+      dropout_probability_range: [0.0, 0.05]
+      angular_velocity_bias_rps_range: [-0.02, 0.02]
+      angular_velocity_random_walk_rps_range: [0.0, 0.005]

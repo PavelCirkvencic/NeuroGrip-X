@@ -1,0 +1,22 @@
+schema_version: 1
+scenario_id: c2dev_evaluation_trackable_split_seed0202
+seed: 202
+track: small_track
+base_vehicle:
+  mass_scale: 1.0
+  inertia_scale: 1.0
+  pacejka_A_scale: 1.0
+  pacejka_B_scale: 1.0
+  pacejka_C_scale: 1.0
+actuator:
+  steering_gain: 1.0
+  steering_delay_s: 0.02
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 1.0
+    rear_scale: 1.0
+  - start_s: 12.0
+    front_scale: 0.60
+    rear_scale: 0.90
+sensors:
+  imu_noise_profile: nominal_v1

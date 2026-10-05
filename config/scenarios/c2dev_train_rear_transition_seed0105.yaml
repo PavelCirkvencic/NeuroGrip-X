@@ -1,0 +1,22 @@
+schema_version: 1
+scenario_id: c2dev_train_rear_transition_seed0105
+seed: 105
+track: small_track
+base_vehicle:
+  mass_scale: 1.04
+  inertia_scale: 1.08
+  pacejka_A_scale: 0.96
+  pacejka_B_scale: 1.02
+  pacejka_C_scale: 1.0
+actuator:
+  steering_gain: 0.96
+  steering_delay_s: 0.05
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.90
+    rear_scale: 0.84
+  - start_s: 12.0
+    front_scale: 0.95
+    rear_scale: 0.58
+sensors:
+  imu_noise_profile: nominal_v1

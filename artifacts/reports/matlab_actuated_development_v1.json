@@ -1,0 +1,42 @@
+{
+  "active_candidate_samples": 1513,
+  "active_deadline_misses": 0,
+  "active_invalid_solutions": 0,
+  "active_max_solve_time_ms": 10.455,
+  "active_median_solve_time_ms": 2.155,
+  "active_mux_samples": 1514,
+  "active_non_matlab_mux_samples": 0,
+  "active_p95_solve_time_ms": 3.7518,
+  "episode_termination": "lap_complete",
+  "evaluation_split": "development",
+  "evidence_sha256": {
+    "runs/eufs_v1/matlab_actuated_development_v9/command_mux_status.csv": "e6651fdcb536ea84d25d58a94735fecc08a6609f8edfa2ae27991f893d9acb03",
+    "runs/eufs_v1/matlab_actuated_development_v9/griprelease_trackdrive_balanced_seed0823__C2_NEUROGRIP__seed0823/episode.csv": "ee329828a2616b82037dc01dc59d6b8a0b3e33d5f61eb78d7df6398192ef4fb0",
+    "runs/eufs_v1/matlab_actuated_development_v9/griprelease_trackdrive_balanced_seed0823__C2_NEUROGRIP__seed0823/episode.events.jsonl": "ac937ba5ea84f69bb5b53192333618ea12e021ad3bbd312d349433a0f6174b81",
+    "runs/eufs_v1/matlab_actuated_development_v9/griprelease_trackdrive_balanced_seed0823__C2_NEUROGRIP__seed0823/episode.metadata.json": "156f769a5fc417341369b8f23e8fa1da607e90e0ba8ee7482ebf80e6c16a832c",
+    "runs/eufs_v1/matlab_actuated_development_v9/matlab_candidate.csv": "6c0c258dbb84f3e3cddac01d3fb7099a8cb6ae84099aeaca597b524279055474"
+  },
+  "experiment_start_time_s": 7.3,
+  "lap_complete_time_s": 40.42,
+  "lap_safety_valid": true,
+  "lateral_authority": "matlab_mpc_active_set",
+  "longitudinal_authority": "python_shared_speed_policy",
+  "matlab_active_fraction_after_experiment_start": 0.913647342995169,
+  "maximum_absolute_lateral_error_m": 0.2351693218328134,
+  "maximum_collision_count": 0,
+  "minimum_boundary_margin_m": 0.6627236405034328,
+  "mode": "matlab_lateral_actuator_in_loop_development",
+  "new_fallbacks_after_takeover": 0,
+  "new_rejections_after_takeover": 0,
+  "performance_claim": false,
+  "post_lap_fallbacks_during_shutdown": 1,
+  "pre_takeover_rejections": 1,
+  "schema_version": 1,
+  "source_sha256": {
+    "matlab/+neurogrip/python_equivalent_mpc_move.m": "aa8f1d466ac6f302f6159e9668777ce849f2466f9833353ba4eb79b06b498d5e",
+    "matlab/run_live_matlab_candidate.m": "90256ed643f259d1ff24aa2894b88fedfdcee491f00042d59ccc36c3c572b173",
+    "src/neurogrip_control/neurogrip_control/candidate_mux.py": "0eba72de5c0baba031e1c6e3a41774f00108f015317026bfee7d6217fd5e15aa"
+  },
+  "takeover_progress": 0.07048050223953879,
+  "takeover_time_s": 10.16
+}

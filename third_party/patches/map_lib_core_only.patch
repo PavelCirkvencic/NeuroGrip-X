@@ -1,0 +1,57 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 052454b..adf36e8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,7 +26,6 @@ find_package(eufs_gmock_matchers REQUIRED)
+ find_package(eufs_logger REQUIRED)
+ find_package(geometry_msgs REQUIRED)
+ find_package(angles REQUIRED)
+-find_package(pybind11_conversions REQUIRED)
+ 
+ set(map_lib_dependencies
+   eufs_msgs
+@@ -36,7 +35,6 @@ set(map_lib_dependencies
+   eufs_logger
+   geometry_msgs
+   angles
+-  pybind11_conversions
+ )
+ 
+ # Create library
+@@ -103,16 +101,6 @@ install(FILES
+   DESTINATION share/${PROJECT_NAME}
+ )
+ 
+-pybind11_add_module(_type SHARED
+-    src/python/type/cone.cpp
+-    src/python/type/map.cpp
+-    src/python/type.cpp
+-)
+-
+-target_link_libraries(_type PUBLIC
+-      map_lib
+-)
+-
+ pybind11_add_module(_io SHARED
+     src/python/io/reader.cpp
+     src/python/io.cpp
+@@ -155,7 +143,6 @@ target_link_libraries(_fov PUBLIC
+ install(
+       TARGETS
+       _io
+-      _type
+       _association
+       _align
+       _fov
+diff --git a/package.xml b/package.xml
+index 44a86eb..5c10c24 100644
+--- a/package.xml
++++ b/package.xml
+@@ -36,7 +36,6 @@
+   <depend>eufs_gmock_matchers</depend>
+   <depend>eufs_logger</depend>
+   <depend>angles</depend>
+-  <depend>pybind11_conversions</depend>
+ 
+   <test_depend>rclcpp</test_depend>
+   <test_depend>eigen</test_depend>

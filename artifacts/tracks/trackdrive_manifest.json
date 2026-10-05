@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-02T20:25:10.369426+00:00",
+  "name": "trackdrive",
+  "input_csv": "external/eufs_ws/src/map_lib/maps/competitions/FSUK/2023/trackdrive.csv",
+  "input_sha256": "046701ae74ddfc6edf8a64cd0a7af0845fd1f11296e843a32cc8374578a5df9f",
+  "car_start": {
+    "x": 4.0,
+    "y": 0.0,
+    "theta": 201.0
+  },
+  "cone_count": 201,
+  "centerline_midpoints": 196,
+  "centerline_length_m": 235.52613095154115,
+  "sample_spacing_m": 0.2,
+  "smoothing_per_midpoint_m2": 0.03,
+  "samples": 1178,
+  "min_left_width_m": 1.4680933746575917,
+  "min_right_width_m": 1.499696433376595,
+  "max_abs_curvature_1pm": 0.21654308446966797,
+  "outputs": {
+    "npz": "artifacts/tracks/trackdrive_reference.npz",
+    "mat": "artifacts/tracks/trackdrive_reference.mat",
+    "sdf": "artifacts/tracks/trackdrive_visual.sdf",
+    "preview": "artifacts/tracks/trackdrive_preview.png"
+  },
+  "npz_sha256": "a3361a857834bf5eed8562dd84ade5e379e5863846a9c6d413f7a9c8513923e3",
+  "mat_sha256": "442d922fc9716ba4e292a7602163aea3b157eb377e09b209e6d592936c86f5f4"
+}

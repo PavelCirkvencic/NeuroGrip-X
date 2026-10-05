@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>neurogrip_bringup</name>
+  <version>0.1.0</version>
+  <description>Launch files for the NeuroGrip-X simulation and managed excitation recordings.</description>
+  <maintainer email="pavelci2005@gmail.com">Pavel</maintainer>
+  <license>Apache-2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>launch</depend>
+  <depend>launch_ros</depend>
+  <depend>ament_index_python</depend>
+  <exec_depend>neurogrip_control</exec_depend>
+  <exec_depend>eufs_sim2</exec_depend>
+  <exec_depend>eufs_msgs</exec_depend>
+  <exec_depend>vehicle_models</exec_depend>
+  <exec_depend>map_lib</exec_depend>
+  <exec_depend>ackermann_msgs</exec_depend>
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

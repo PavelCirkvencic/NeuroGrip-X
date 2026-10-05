@@ -1,0 +1,22 @@
+schema_version: 1
+scenario_id: c2dev_calibration_rear_loss_seed0121
+seed: 121
+track: small_track
+base_vehicle:
+  mass_scale: 0.98
+  inertia_scale: 1.16
+  pacejka_A_scale: 1.02
+  pacejka_B_scale: 0.91
+  pacejka_C_scale: 1.04
+actuator:
+  steering_gain: 1.02
+  steering_delay_s: 0.07
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.88
+    rear_scale: 0.99
+  - start_s: 12.0
+    front_scale: 0.90
+    rear_scale: 0.60
+sensors:
+  imu_noise_profile: nominal_v1

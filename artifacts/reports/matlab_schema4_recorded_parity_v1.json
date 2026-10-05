@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "capture_file": "seed0823_8mps_parity_v3.csv",
+  "capture_sha256": "e5994959b6fa14aad6a42bffa5907016f12396e19e1f162a963986a2d5a539ce",
+  "rows": 1398,
+  "valid_solution_rows": 1398,
+  "max_policy_error": 0,
+  "max_target_speed_error_mps": 0,
+  "max_matrix_error": 8.8817841970012523E-16,
+  "median_first_move_error_rad": 5.3284073292525491E-7,
+  "max_first_move_error_rad": 0.00045779912849369664,
+  "sign_mismatches": 0,
+  "rate_saturation_mismatches": 0,
+  "magnitude_saturation_mismatches": 0
+}

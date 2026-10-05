@@ -1,0 +1,40 @@
+{
+  "schema_version": 4,
+  "purpose": "Frozen publication holdout: standard fixed-mu Python MPC versus causal per-axle neural-Koopman MPC with MATLAB lateral actuation, paired under identical deterministic sensor noise and shared safety constraints.",
+  "development_split_manifest": "config/koopman_grip_mixed_domain_splits_v2.json",
+  "target_speed_mps": 12.0,
+  "target_speed_min_mps": 4.0,
+  "startup_speed_cap_mps": 6.5,
+  "startup_speed_cap_end_progress": 0.12,
+  "fixed_mu": 0.75,
+  "scalar_mu_utilisation": 0.70,
+  "neurogrip_utilisation": 0.98,
+  "grip_error_margin_scale": 0.5,
+  "controllers": ["C0_FIXED", "C2_NEUROGRIP"],
+  "actuation_sources": {
+    "C0_FIXED": "python",
+    "C2_NEUROGRIP": "matlab"
+  },
+  "c2_ensemble_manifest": "runs/eufs_v1/models/c3_koopman_grip_mixed_v2/ensemble_manifest.json",
+  "c2_ensemble_manifest_sha256": "896dc9dd8589238d1b88cee68caf7d53be0c3978bfc00766bec301068e039702",
+  "c2_adaptive_speed_max_mps": 12.0,
+  "c2_model_blend": 0.0,
+  "freeze_note": "All scenario bytes, actual EUFS wheel/IMU seeds, shared 6.5 m/s launch envelope, fixed-mu utilisation, smoothed MPC cost, MATLAB actuation assignment, transport implementation and model hashes were fixed after three complete seed-0921 robustness pairs and before the first v7 episode. No outcome-based rerun or tuning is permitted.",
+  "scenarios": [
+    {
+      "scenario_id": "matlabrelease_trackdrive_front_split_seed0931",
+      "yaml": "config/scenarios/matlabrelease_trackdrive_front_split_seed0931.yaml",
+      "yaml_sha256": "1de18130563750bbc144fd2bfb0e889ae935eb2a566de637b183583c9f867966"
+    },
+    {
+      "scenario_id": "matlabrelease_trackdrive_rear_split_seed0932",
+      "yaml": "config/scenarios/matlabrelease_trackdrive_rear_split_seed0932.yaml",
+      "yaml_sha256": "6ccda5b54d69b59755a02597a0f3ae8532f3a22beae48c433ae12b508a948413"
+    },
+    {
+      "scenario_id": "matlabrelease_trackdrive_balanced_seed0933",
+      "yaml": "config/scenarios/matlabrelease_trackdrive_balanced_seed0933.yaml",
+      "yaml_sha256": "2d84c2dddbe1ed1d10688cb8132d2dfa3f5c0b598797c99b2d5b42f102ae7b30"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "High-speed, grip-only identification for the per-axle neural Koopman context head. Splits are complete scenario IDs.",
+  "splits": {
+    "train": [
+      "gripid_train_nominal_seed0701",
+      "gripid_train_balanced_low_seed0702",
+      "gripid_train_front_soft_seed0703",
+      "gripid_train_rear_soft_seed0704",
+      "gripid_train_front_transition_seed0705",
+      "gripid_train_rear_transition_seed0706"
+    ],
+    "validation": [
+      "gripid_validation_split_seed0711"
+    ],
+    "calibration": [
+      "gripid_calibration_split_seed0721"
+    ]
+  }
+}

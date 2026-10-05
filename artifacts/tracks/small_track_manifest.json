@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-02T14:58:30.102894+00:00",
+  "name": "small_track",
+  "input_csv": "external/eufs_ws/src/map_lib/maps/tracks/small_track.csv",
+  "input_sha256": "ea3a923bd59f624c61a6e1abd11e9eb7f728bbf5edfc1dd6a6f66ee80da478b9",
+  "car_start": {
+    "x": 0.0,
+    "y": 0.0,
+    "theta": 0.0
+  },
+  "cone_count": 71,
+  "centerline_midpoints": 67,
+  "centerline_length_m": 104.5321200861327,
+  "sample_spacing_m": 0.2,
+  "smoothing_per_midpoint_m2": 0.03,
+  "samples": 523,
+  "min_left_width_m": 1.7571343697269488,
+  "min_right_width_m": 1.567322190789544,
+  "max_abs_curvature_1pm": 0.2753143390262751,
+  "outputs": {
+    "npz": "artifacts/tracks/small_track_reference.npz",
+    "mat": "artifacts/tracks/small_track_reference.mat",
+    "sdf": "artifacts/tracks/small_track_visual.sdf",
+    "preview": "artifacts/tracks/small_track_preview.png"
+  },
+  "npz_sha256": "a491ca943d4d50f5adaa83fcd2a9a0ca6d2286eac45bbaaead2b83e29ec07ad4",
+  "mat_sha256": "82e8ab24fe194d16908dc1e4d6e702724975313d2e241e5f52e9a82a5de5bc67"
+}

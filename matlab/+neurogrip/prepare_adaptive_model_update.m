@@ -1,0 +1,36 @@
+function update = prepare_adaptive_model_update(dynamicsValues, trackingValues)
+%PREPARE_ADAPTIVE_MODEL_UPDATE Safely combine C2 and tracking ROS contracts.
+%
+% Invalid, stale or malformed C2 data must never be converted into a model bus.
+% This function is deterministic and ROS-free so it can be tested before the
+% live subscriber is started.  Freshness is enforced by Ros2AdaptiveModelAdapter.
+
+dynamics = neurogrip.parse_dynamics_flat(dynamicsValues);
+tracking = neurogrip.parse_tracking_state_flat(trackingValues);
+update = struct( ...
+    'valid', false, ...
+    'reason', '', ...
+    'dynamics', dynamics, ...
+    'tracking', tracking, ...
+    'applied_steering', [], ...
+    'a_tracking', nan(4, 4), ...
+    'b_tracking', nan(4, 2), ...
+    'model_bus', [] ...
+);
+if ~dynamics.valid
+    update.reason = dynamics.reason;
+    return;
+end
+if ~tracking.valid
+    update.reason = tracking.reason;
+    return;
+end
+
+[aTracking, bTracking] = neurogrip.build_tracking_plant_from_lateral( ...
+    tracking.v_x_mps, dynamics.a_lateral, dynamics.b_lateral, ...
+    dynamics.sample_time_s);
+update.a_tracking = aTracking;
+update.b_tracking = bTracking;
+update.model_bus = neurogrip.make_adaptive_model_bus(aTracking, bTracking);
+update.valid = true;
+end

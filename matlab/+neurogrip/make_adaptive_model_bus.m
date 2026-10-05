@@ -1,0 +1,29 @@
+function modelBus = make_adaptive_model_bus(aTracking, bTracking)
+%MAKE_ADAPTIVE_MODEL_BUS Create the documented Adaptive MPC online model.
+%
+% Returned field names follow the MATLAB Adaptive MPC Controller block's
+% model-bus contract exactly: A, B, C, D, X, Y, U and DX.  All quantities use
+% physical SI deviation coordinates.  The zero offset vectors are valid
+% because the NeuroGrip tracking model is defined about the zero-error,
+% zero-steering, zero-curvature operating point.  Adaptive MPC requires every
+% model-bus field as a 3-D horizon sequence.  The controller accesses the
+% current model plus its 30 future prediction steps, so the supplied static
+% model repeats values across 31 pages.
+
+arguments
+    aTracking (4, 4) double {mustBeFinite}
+    bTracking (4, 2) double {mustBeFinite}
+end
+
+modelPages = 31;
+modelBus = struct( ...
+    'A', repmat(aTracking, 1, 1, modelPages), ...
+    'B', repmat(bTracking, 1, 1, modelPages), ...
+    'C', repmat(eye(4), 1, 1, modelPages), ...
+    'D', zeros(4, 2, modelPages), ...
+    'X', zeros(4, 1, modelPages), ...
+    'Y', zeros(4, 1, modelPages), ...
+    'U', zeros(2, 1, modelPages), ...
+    'DX', zeros(4, 1, modelPages) ...
+);
+end

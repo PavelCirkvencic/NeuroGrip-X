@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "purpose": "Frozen grip-only publication holdout for schema-3 contextual neural Koopman C2. Scope is asymmetric axle-grip transitions with nominal zero-delay actuator; hashes and controller policy were fixed before any v3 episode was run.",
+  "development_split_manifest": "config/c2_development_provenance_v2.json",
+  "target_speed_mps": 3.0,
+  "c2_adaptive_speed_max_mps": 5.0,
+  "c2_model_blend": 0.25,
+  "controllers": [
+    "C0_FIXED",
+    "C2_NEUROGRIP"
+  ],
+  "c2_ensemble_manifest": "runs/eufs_v1/models/c2_v3_koopman_ensemble/ensemble_manifest_closed_loop_calibrated.json",
+  "c2_ensemble_manifest_sha256": "9fb8165d75bb982d100ba45497738b8ff81fec2aa38c7c0c19c5a0d72b4f3183",
+  "scenarios": [
+    {
+      "scenario_id": "publication_grip_holdout_seed0501",
+      "yaml": "config/scenarios/publication_grip_holdout_seed0501.yaml",
+      "yaml_sha256": "f0a197a82f7b730345fbe49c0039c460aa2d3603a131da0e000bb1328857bba6"
+    },
+    {
+      "scenario_id": "publication_grip_holdout_seed0502",
+      "yaml": "config/scenarios/publication_grip_holdout_seed0502.yaml",
+      "yaml_sha256": "74e725ce1b508f63db929e1bea69524316799165f1caf6ec6dfb53e5693e331e"
+    },
+    {
+      "scenario_id": "publication_grip_holdout_seed0503",
+      "yaml": "config/scenarios/publication_grip_holdout_seed0503.yaml",
+      "yaml_sha256": "a8ed67326c4cef6ba423bd5991f71693ace178e727a759e20399c9b811d485fe"
+    }
+  ]
+}

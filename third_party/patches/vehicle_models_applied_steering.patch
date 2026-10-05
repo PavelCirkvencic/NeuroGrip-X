@@ -1,0 +1,44 @@
+diff --git a/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp b/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
+index c53bf0c..df12106 100644
+--- a/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
++++ b/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
+@@ -75,12 +75,15 @@ class BaseDynamicBicycle {
+ 
+     Command smoothed_steering_cmd = validated_command;
+     if (!steering_initialized_) {
+-      prev_steering_angle_ = command.steering_angle;
++      prev_steering_angle_ = validated_command.steering_angle;
++      current_steering_angle_ = validated_command.steering_angle;
+       steering_initialized_ = true;
+     } else {
+       smoothed_steering_cmd.steering_angle =
+         steering_model_.GetSteeringAngle(prev_steering_angle_, validated_command, dt);
+-      prev_steering_angle_ = command.steering_angle;
++      // Store the actually applied (rate-limited) steering, not the raw request.
++      prev_steering_angle_ = smoothed_steering_cmd.steering_angle;
++      current_steering_angle_ = smoothed_steering_cmd.steering_angle;
+     }
+ 
+     if (state(Vars::_v_x) < 0.1) {
+@@ -144,6 +147,13 @@ class BaseDynamicBicycle {
+     return abs(state(Vars::_v_x)) < 0.1 ? 0.0 : rear_tyre_model_.GetLateralForce(state, command);
+   }
+ 
++  /**
++   * @brief Get the steering angle actually applied on the last Update
++   *
++   * @return Applied steering angle [rad]
++   */
++  double GetCurrentSteeringAngle() const { return current_steering_angle_; }
++
+  protected:
+   /**
+    * @brief Get longitudinal acceleration
+@@ -200,6 +210,7 @@ class BaseDynamicBicycle {
+  protected:
+   bool steering_initialized_ = false;
+   double prev_steering_angle_;
++  double current_steering_angle_ = 0.0;
+ 
+   Param::Tyre tyre_params_;
+   Param::Inertia inertia_params_;

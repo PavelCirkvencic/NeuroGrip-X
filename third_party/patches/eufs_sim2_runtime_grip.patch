@@ -1,0 +1,154 @@
+diff --git a/include/eufs_sim2/core/base.hpp b/include/eufs_sim2/core/base.hpp
+index beed0c1..b686189 100644
+--- a/include/eufs_sim2/core/base.hpp
++++ b/include/eufs_sim2/core/base.hpp
+@@ -64,6 +64,13 @@ class CoreSimulationBase {
+    */
+   virtual sensors::VehicleForces GetVehicleForces() const = 0;
+ 
++  /**
++   * @brief Set the front and rear lateral tyre-force scales at runtime
++   * @param front Front axle scale
++   * @param rear Rear axle scale
++   */
++  virtual void SetTyreScales(double front, double rear) = 0;
++
+   /**
+    * @brief Reset the simulation
+    */
+diff --git a/include/eufs_sim2/core/eufs_core.hpp b/include/eufs_sim2/core/eufs_core.hpp
+index 9e0ae9e..1f7d12f 100644
+--- a/include/eufs_sim2/core/eufs_core.hpp
++++ b/include/eufs_sim2/core/eufs_core.hpp
+@@ -30,6 +30,10 @@ class EufsCore : public CoreSimulationBase {
+ 
+   [[nodiscard]] VehicleForces GetVehicleForces() const override;
+ 
++  void SetTyreScales(double front, double rear) override {
++    model_.SetTyreScales(front, rear);
++  }
++
+   void Reset() override;
+ 
+  private:
+diff --git a/include/eufs_sim2/sim_node.hpp b/include/eufs_sim2/sim_node.hpp
+index 3692024..31f6de5 100644
+--- a/include/eufs_sim2/sim_node.hpp
++++ b/include/eufs_sim2/sim_node.hpp
+@@ -5,6 +5,7 @@
+ #include <memory>
+ #include <string>
+ #include <rclcpp/rclcpp.hpp>
++#include <rcl_interfaces/msg/set_parameters_result.hpp>
+ #include <rosgraph_msgs/msg/clock.hpp>
+ 
+ #include "eufs_sim2/core/base.hpp"
+@@ -37,6 +38,14 @@ class SimulationNode : public rclcpp::Node {
+    */
+   std::unique_ptr<plugin::Plugin> GetPlugin(std::string);
+ 
++  /**
++   * @brief Validate and atomically apply runtime grip-scale parameter updates
++   * @param parameters Proposed parameter set
++   * @return Result with successful=false if any value is invalid
++   */
++  rcl_interfaces::msg::SetParametersResult OnSetParameters(
++      const std::vector<rclcpp::Parameter> &parameters);
++
+  private:
+   // ROS publisher
+   rclcpp::Publisher<rosgraph_msgs::msg::Clock>::SharedPtr time_pub_;
+@@ -50,6 +59,10 @@ class SimulationNode : public rclcpp::Node {
+  private:
+   std::shared_ptr<SimulationBase> sim_;
+   std::string plugin_yaml;
++  rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr
++      on_set_parameters_callback_;
++  double front_grip_scale_ = 1.0;
++  double rear_grip_scale_ = 1.0;
+ };
+ 
+ }  // namespace eufs::sim2
+diff --git a/src/eufs_core.cpp b/src/eufs_core.cpp
+index 2321003..ce7231e 100644
+--- a/src/eufs_core.cpp
++++ b/src/eufs_core.cpp
+@@ -9,6 +9,10 @@ namespace eufs::sim2::core {
+ 
+ void EufsCore::Step(Duration dt) {
+   state_ = model_.Update(state_, command_, dt);
++  // Publish the steering angle that was actually applied (rate-limited),
++  // not the raw requested command. Consumed by the wheel-speed plugin.
++  state_.state(type::VehicleStateMember::_steering) =
++      model_.base_model_.GetCurrentSteeringAngle();
+   time_ += dt;
+ }
+ 
+diff --git a/src/sim_node.cpp b/src/sim_node.cpp
+index a0b3a05..83ab58c 100644
+--- a/src/sim_node.cpp
++++ b/src/sim_node.cpp
+@@ -1,6 +1,8 @@
+ #include "eufs_sim2/sim_node.hpp"
+ 
++#include <cmath>
+ #include <string>
++#include <vector>
+ #include <filesystem>
+ #include "ament_index_cpp/get_package_share_directory.hpp"
+ 
+@@ -37,6 +39,16 @@ SimulationNode::SimulationNode() : rclcpp::Node("eufs_sim2") {
+   std::string core_params_path = declare_parameter<std::string>("core_params", "");
+   sim_period_ = std::chrono::nanoseconds(static_cast<int>(1e9 * sim_step));
+ 
++  // Runtime grip scales (NeuroGrip scenarios). The callback validates the
++  // whole proposed set before mutating; SetParametersAtomically prevents any
++  // frame from observing a half-applied front/rear change.
++  declare_parameter<double>("dynamics.front_grip_scale", 1.0);
++  declare_parameter<double>("dynamics.rear_grip_scale", 1.0);
++  front_grip_scale_ = get_parameter("dynamics.front_grip_scale").as_double();
++  rear_grip_scale_ = get_parameter("dynamics.rear_grip_scale").as_double();
++  on_set_parameters_callback_ = add_on_set_parameters_callback(
++      std::bind(&SimulationNode::OnSetParameters, this, std::placeholders::_1));
++
+   // Initialise simulation node
+   eufs::vehicle_models::Param param;
+   plugin_yaml = std::filesystem::path(share_path) / "config" / "plugin_params.yaml";
+@@ -112,6 +124,37 @@ void SimulationNode::InitialisePlugins() {
+   }
+ }
+ 
++rcl_interfaces::msg::SetParametersResult SimulationNode::OnSetParameters(
++    const std::vector<rclcpp::Parameter> &parameters) {
++  rcl_interfaces::msg::SetParametersResult result;
++  result.successful = true;
++
++  double front = front_grip_scale_;
++  double rear = rear_grip_scale_;
++  for (const auto &parameter : parameters) {
++    if (parameter.get_name() == "dynamics.front_grip_scale") {
++      front = parameter.as_double();
++    } else if (parameter.get_name() == "dynamics.rear_grip_scale") {
++      rear = parameter.as_double();
++    }
++  }
++
++  constexpr double kMinScale = 0.35;
++  constexpr double kMaxScale = 1.30;
++  if (!std::isfinite(front) || !std::isfinite(rear) || front < kMinScale ||
++      front > kMaxScale || rear < kMinScale || rear > kMaxScale) {
++    result.successful = false;
++    result.reason = "grip scales must be finite and within [0.35, 1.30]";
++    return result;
++  }
++
++  sim_->GetCore().SetTyreScales(front, rear);
++  front_grip_scale_ = front;
++  rear_grip_scale_ = rear;
++  result.reason = "grip scales applied";
++  return result;
++}
++
+ void SimulationNode::Loop() {
+   // Step through sim
+   sim_->Step(sim_period_);

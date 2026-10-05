@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "Disjoint C2 development data. These are identification episodes, never a closed-loop benchmark.",
+  "splits": {
+    "train": [
+      "c2dev_train_nominal_seed0101",
+      "c2dev_train_front_soft_seed0102",
+      "c2dev_train_rear_soft_seed0103",
+      "c2dev_train_front_transition_seed0104",
+      "c2dev_train_rear_transition_seed0105",
+      "c2dev_train_high_grip_asym_seed0106"
+    ],
+    "validation": [
+      "c2dev_validation_split_transition_seed0111"
+    ],
+    "calibration": [
+      "c2dev_calibration_rear_loss_seed0121"
+    ]
+  }
+}

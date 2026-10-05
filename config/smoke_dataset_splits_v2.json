@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "purpose": "Three-run pipeline smoke only; not the final benchmark dataset.",
+  "splits": {
+    "train": ["system_id_nominal_seed0001"],
+    "validation": ["system_id_front_soft_seed0002"],
+    "calibration": ["system_id_rear_soft_seed0003"]
+  }
+}

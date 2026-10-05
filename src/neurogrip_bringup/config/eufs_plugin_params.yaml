@@ -1,0 +1,76 @@
+# NeuroGrip-X EUFS Sim 2 plugin configuration (v2).
+#
+# Differences from the upstream stock config:
+#   * 50 Hz telemetry (vehicle state, gt transform, forces, twist, wheel speed, IMU);
+#   * realistic IMU covariance (angular var 4e-4, linear var 4e-2), not identity;
+#   * zero steering variance on the wheel-speed channel because it carries the
+#     applied steering that enters the learned model.
+eufs_sim2:
+  ros__parameters:
+    frequency: 200.0
+    sim_step: 0.005
+    plugin_names:
+      - track_changer_plugin
+      - control_input
+      - state_machine
+      - vehicle_state_plugin
+      - wheel_speed_plugin
+      - imu_plugin
+      - gt_transform
+      - force_publisher
+      - twist_publisher
+      - cone_collision_tracker
+    plugin:
+      control_input:
+        # Control input comes from /cmd (AckermannDriveStamped).
+        frequency: 200.0
+      track_changer_plugin:
+        remove_cones_num: 0
+        color_change_to_orange: 0
+        color_change_to_yellow: 0
+        color_change_to_blue: 0
+        shift_cones_num: 0
+        shift_cones_min_radius: 0.0
+        shift_cones_max_radius: 0.0
+      state_machine:
+        enforce: false
+      vehicle_state_plugin:
+        frequency: 50.0
+      wheel_speed_plugin:
+        frequency: 50.0
+        noise_covariance: [
+          0.000422806233327, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.000422806233327, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.000422806233327, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.000422806233327, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0
+        ]
+      imu_plugin:
+        frequency: 50.0
+        angular_velocity_drift_vector: [0.0, 0.0, 0.0]
+        linear_acceleration_drift_vector: [0.0, 0.0, 0.0]
+        # 3 angular axes sigma=0.02 rad/s -> var 4e-4,
+        # 3 linear axes sigma=0.20 m/s^2 -> var 4e-2, off-diagonal zero.
+        noise_covariance: [
+          0.0004, 0.0, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0004, 0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0004, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.04, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.04, 0.0,
+          0.0, 0.0, 0.0, 0.0, 0.0, 0.04
+        ]
+      gt_transform:
+        frequency: 50.0
+      force_publisher:
+        frequency: 50.0
+      twist_publisher:
+        frequency: 50.0
+      cone_collision_tracker:
+        frequency: 50.0
+        cones_frame_id: map
+        num_x_boxes: 10
+        num_y_boxes: 10
+        range_x_dim: 10.0
+        range_y_dim: 10.0
+        # Matches the conservative 1.4 m vehicle-width acceptance envelope.
+        collision_radius: 0.8

@@ -1,0 +1,21 @@
+{
+  "capture_file": "matlab_exact_shadow.csv",
+  "capture_sha256": "d5f8284d054c035fcbf1651da4e518c947690c0f009aaaf0f48069cf48793d8e",
+  "deadline_misses": 0,
+  "deadline_ms": 20.0,
+  "episode_termination": "lap_complete",
+  "max_abs_error_rad": 0.0006406415486210626,
+  "max_solve_time_ms": 7.15,
+  "median_abs_error_rad": 1.0741087785592907e-06,
+  "median_solve_time_ms": 2.367,
+  "mode": "matlab_exact_mpc_shadow",
+  "p95_solve_time_ms": 3.7192,
+  "read_only": true,
+  "samples": 773,
+  "schema_version": 1,
+  "sign_mismatches": 0,
+  "source_sha256": {
+    "matlab/+neurogrip/python_equivalent_mpc_move.m": "aa8f1d466ac6f302f6159e9668777ce849f2466f9833353ba4eb79b06b498d5e",
+    "matlab/monitor_live_python_equivalent_shadow.m": "f068b178153b525500f7e78e94336ddf8168c9adbc183f7e9aec1aa5f16296c9"
+  }
+}

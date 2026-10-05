@@ -1,0 +1,19 @@
+schema_version: 1
+scenario_id: system_id_front_soft_seed0002
+seed: 2
+track: small_track
+base_vehicle:
+  mass_scale: 1.0
+  inertia_scale: 1.0
+  pacejka_A_scale: 0.95
+  pacejka_B_scale: 0.90
+  pacejka_C_scale: 0.95
+actuator:
+  steering_gain: 1.0
+  steering_delay_s: 0.03
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.72
+    rear_scale: 0.95
+sensors:
+  imu_noise_profile: nominal_v1

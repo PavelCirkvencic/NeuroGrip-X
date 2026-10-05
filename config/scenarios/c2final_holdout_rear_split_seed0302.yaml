@@ -1,0 +1,22 @@
+schema_version: 1
+scenario_id: c2final_holdout_rear_split_seed0302
+seed: 302
+track: small_track
+base_vehicle:
+  mass_scale: 1.02
+  inertia_scale: 0.96
+  pacejka_A_scale: 0.99
+  pacejka_B_scale: 1.03
+  pacejka_C_scale: 0.98
+actuator:
+  steering_gain: 1.0
+  steering_delay_s: 0.0
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.96
+    rear_scale: 1.00
+  - start_s: 14.0
+    front_scale: 0.91
+    rear_scale: 0.64
+sensors:
+  imu_noise_profile: nominal_v1

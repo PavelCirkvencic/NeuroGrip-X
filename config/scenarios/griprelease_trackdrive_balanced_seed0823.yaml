@@ -1,0 +1,10 @@
+schema_version: 1
+scenario_id: griprelease_trackdrive_balanced_seed0823
+seed: 823
+track: trackdrive
+base_vehicle: {mass_scale: 1.0, inertia_scale: 1.0, pacejka_A_scale: 1.0, pacejka_B_scale: 1.0, pacejka_C_scale: 1.0}
+actuator: {steering_gain: 1.0, steering_delay_s: 0.0}
+grip_schedule:
+  - {start_s: 0.0, front_scale: 0.92, rear_scale: 0.92}
+  - {start_s: 10.0, start_progress: 0.215, front_scale: 0.755, rear_scale: 0.755}
+sensors: {imu_noise_profile: nominal_v1}

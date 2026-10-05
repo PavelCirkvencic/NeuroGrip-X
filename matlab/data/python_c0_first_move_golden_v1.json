@@ -1,0 +1,75 @@
+{
+  "schema_version": 2,
+  "source": "controllers/python/mpc_qp.py LateralMpc / OSQP",
+  "nominal_fit_sha256": "10b1c8053b62f04041c9d65c53e4b31a15ddff1a90d849fd1c8d8f2e258d3e99",
+  "sample_time_s": 0.02,
+  "mpc_horizon": 20,
+  "steering_rate_limit_rad_s": 2.5,
+  "vectors": [
+    {
+      "id": "zero_straight",
+      "vx_mps": 4.5,
+      "state": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "curvature_1pm": 0.0,
+      "previous_steering_rad": 0.0,
+      "python_first_move_rad": 0.0
+    },
+    {
+      "id": "small_signal",
+      "vx_mps": 4.5,
+      "state": [
+        0.005,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "curvature_1pm": 0.0,
+      "previous_steering_rad": 0.0,
+      "python_first_move_rad": -0.0020133006518576924
+    },
+    {
+      "id": "positive_tracking",
+      "vx_mps": 4.5,
+      "state": [
+        0.2,
+        0.05,
+        0.0,
+        0.0
+      ],
+      "curvature_1pm": 0.0,
+      "previous_steering_rad": 0.0,
+      "python_first_move_rad": -0.05
+    },
+    {
+      "id": "negative_tracking",
+      "vx_mps": 4.5,
+      "state": [
+        -0.35,
+        -0.08,
+        0.03,
+        -0.02
+      ],
+      "curvature_1pm": 0.0,
+      "previous_steering_rad": 0.0,
+      "python_first_move_rad": 0.0499792572917046
+    },
+    {
+      "id": "curved_entry",
+      "vx_mps": 4.5,
+      "state": [
+        0.1,
+        0.03,
+        0.02,
+        0.01
+      ],
+      "curvature_1pm": 0.04,
+      "previous_steering_rad": -0.02,
+      "python_first_move_rad": -0.04575955259694458
+    }
+  ]
+}

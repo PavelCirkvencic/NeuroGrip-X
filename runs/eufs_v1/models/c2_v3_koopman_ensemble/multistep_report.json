@@ -1,0 +1,67 @@
+{
+  "ensemble_manifest": "runs/eufs_v1/models/c2_v3_koopman_ensemble/ensemble_manifest.json",
+  "model_family": "contextual_neural_koopman_v2",
+  "offline_gate": {
+    "minimum_observed_reduction_percent": 52.374702930199845,
+    "passed": true,
+    "required_horizons": [
+      5,
+      10,
+      20
+    ],
+    "required_minimum_reduction_percent": 15.0
+  },
+  "schema_version": 1,
+  "splits": {
+    "calibration": {
+      "horizons": {
+        "1": {
+          "learned_vector_rmse": 0.008947634138166904,
+          "nominal_vector_rmse": 0.019280944019556046,
+          "relative_reduction_percent": 53.59338148022418
+        },
+        "10": {
+          "learned_vector_rmse": 0.015383141115307808,
+          "nominal_vector_rmse": 0.032366909086704254,
+          "relative_reduction_percent": 52.47262852903391
+        },
+        "20": {
+          "learned_vector_rmse": 0.015431297942996025,
+          "nominal_vector_rmse": 0.03335799276828766,
+          "relative_reduction_percent": 53.740328291976695
+        },
+        "5": {
+          "learned_vector_rmse": 0.01428134460002184,
+          "nominal_vector_rmse": 0.03162860870361328,
+          "relative_reduction_percent": 54.84675050410824
+        }
+      },
+      "maximum_koopman_spectral_radius": 0.8723297119140625
+    },
+    "validation": {
+      "horizons": {
+        "1": {
+          "learned_vector_rmse": 0.007705443073064089,
+          "nominal_vector_rmse": 0.018210483714938164,
+          "relative_reduction_percent": 57.686774312627016
+        },
+        "10": {
+          "learned_vector_rmse": 0.013912620022892952,
+          "nominal_vector_rmse": 0.03263444826006889,
+          "relative_reduction_percent": 57.368300171582
+        },
+        "20": {
+          "learned_vector_rmse": 0.015968352556228638,
+          "nominal_vector_rmse": 0.033529140055179596,
+          "relative_reduction_percent": 52.374702930199845
+        },
+        "5": {
+          "learned_vector_rmse": 0.012512601912021637,
+          "nominal_vector_rmse": 0.03168369457125664,
+          "relative_reduction_percent": 60.50775617761119
+        }
+      },
+      "maximum_koopman_spectral_radius": 0.8723455667495728
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>neurogrip_ai</name>
+  <version>0.1.0</version>
+  <description>Read-only learned-dynamics inference for NeuroGrip-X.</description>
+  <maintainer email="pavelci2005@gmail.com">Pavel</maintainer>
+  <license>Apache-2.0</license>
+
+  <depend>rclpy</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>neurogrip_interfaces</depend>
+  <depend>neurogrip_control</depend>
+  <exec_depend>eufs_msgs</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <!-- PyTorch is a pip dependency of the workspace venv; see requirements.txt
+       and docs/environment.md. It has no rosdep key for this workspace. -->
+
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

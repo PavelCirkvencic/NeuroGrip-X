@@ -1,0 +1,46 @@
+build/
+install/
+log/
+.venv/
+__pycache__/
+*.py[cod]
+*.mcap
+*.db3
+*.bag
+*.mat
+*.slxc
+slprj/
++bus_conv_fcns/
+data/raw/
+data/processed/
+data/generated_worlds/
+runs/
+
+# External workspaces and generated experiment data
+external/eufs_ws/src/
+external/eufs_ws/build/
+external/eufs_ws/install/
+external/eufs_ws/log/
+data/eufs_v1/
+runs/eufs_v1/
+artifacts/videos/*
+!artifacts/videos/neurogrip_x_matlab_holdout_v7.mp4
+!artifacts/videos/neurogrip_x_matlab_holdout_v7_poster.png
+artifacts/reports/generated/
+artifacts/benchmarks/
+
+# Version only the selected model artifacts. Episode data and ad-hoc
+# checkpoints remain local.
+!runs/
+runs/*
+!runs/eufs_v1/
+runs/eufs_v1/*
+!runs/eufs_v1/models/
+runs/eufs_v1/models/*
+!runs/eufs_v1/models/nominal_fit.json
+!runs/eufs_v1/models/c2_v3_koopman_ensemble/
+!runs/eufs_v1/models/c2_v3_koopman_ensemble/*
+!runs/eufs_v1/models/c3_koopman_grip_mixed_v2/
+!runs/eufs_v1/models/c3_koopman_grip_mixed_v2/*
+
+external/deps/

@@ -1,0 +1,120 @@
+diff --git a/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp b/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
+index c53bf0c..42c99c8 100644
+--- a/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
++++ b/include/vehicle_models/models/dynamic_bicycle/base_dynamic_bicycle.hpp
+@@ -62,6 +62,23 @@ class BaseDynamicBicycle {
+         front_tyre_model_(param.tyre, param.inertia, param.aero, param.kinematic),
+         rear_tyre_model_(param.tyre, param.inertia, param.aero, param.kinematic) {}
+ 
++  /**
++   * @brief Set front and rear lateral tyre-force scales at runtime
++   *
++   * @param front Front axle scale
++   * @param rear Rear axle scale
++   */
++  void SetTyreScales(double front, double rear) {
++    front_tyre_model_.SetLateralForceScale(front);
++    rear_tyre_model_.SetLateralForceScale(rear);
++  }
++
++  /** @brief Get the current front axle lateral tyre-force scale */
++  double GetFrontTyreScale() const { return front_tyre_model_.GetLateralForceScale(); }
++
++  /** @brief Get the current rear axle lateral tyre-force scale */
++  double GetRearTyreScale() const { return rear_tyre_model_.GetLateralForceScale(); }
++
+   /**
+    * @brief Propagate vehicle state with time
+    *
+diff --git a/include/vehicle_models/models/dynamic_bicycle/dynamic_bicycle.hpp b/include/vehicle_models/models/dynamic_bicycle/dynamic_bicycle.hpp
+index 2fb46ea..cb4d926 100644
+--- a/include/vehicle_models/models/dynamic_bicycle/dynamic_bicycle.hpp
++++ b/include/vehicle_models/models/dynamic_bicycle/dynamic_bicycle.hpp
+@@ -208,6 +208,24 @@ class DynamicBicycle : public VehicleModel<State> {
+     FrontTyre,
+     RearTyre> base_model_;
+ 
++  /**
++   * @brief Set front and rear lateral tyre-force scales on every tyre model
++   *
++   * The base model and the separate front/rear models used for the state
++   * derivatives and covariance propagation must all be updated together.
++   */
++  void SetTyreScales(double front, double rear) {
++    base_model_.SetTyreScales(front, rear);
++    front_tyre_model_.SetLateralForceScale(front);
++    rear_tyre_model_.SetLateralForceScale(rear);
++  }
++
++  /** @brief Get the current front axle lateral tyre-force scale */
++  double GetFrontTyreScale() const { return base_model_.GetFrontTyreScale(); }
++
++  /** @brief Get the current rear axle lateral tyre-force scale */
++  double GetRearTyreScale() const { return base_model_.GetRearTyreScale(); }
++
+  protected:
+   /**
+    * @brief Get derivative of the front lateral tyre force w.r.t. to forward and lateral velocity,
+diff --git a/include/vehicle_models/tyre_model.hpp b/include/vehicle_models/tyre_model.hpp
+index c729a2b..9817572 100644
+--- a/include/vehicle_models/tyre_model.hpp
++++ b/include/vehicle_models/tyre_model.hpp
+@@ -1,6 +1,9 @@
+ #ifndef INCLUDE_VEHICLE_MODELS_TYRE_MODEL_HPP_
+ #define INCLUDE_VEHICLE_MODELS_TYRE_MODEL_HPP_
+ 
++#include <cmath>
++#include <stdexcept>
++
+ #include <state_lib/state_vector.hpp>
+ #include <state_lib/constraint/vector.hpp>
+ 
+@@ -40,9 +43,26 @@ class TyreModel {
+     const double mu_y = PacejkaModel(state, command);
+     const double lateral_force = tyre_downforce * mu_y;
+ 
+-    return lateral_force;
++    return lateral_force_scale_ * lateral_force;
+   }
+ 
++  /**
++   * @brief Set the multiplicative lateral tyre-force scale (runtime grip)
++   *
++   * @param scale Positive finite scale, 1.0 is the nominal tyre
++   */
++  void SetLateralForceScale(double scale) {
++    if (!std::isfinite(scale) || scale <= 0.0) {
++      throw std::invalid_argument("lateral force scale must be positive and finite");
++    }
++    lateral_force_scale_ = scale;
++  }
++
++  /**
++   * @brief Get the multiplicative lateral tyre-force scale
++   */
++  double GetLateralForceScale() const { return lateral_force_scale_; }
++
+   /**
+    * @brief Get lateral tyre force derivatives w.r.t. forward and lateral velocity, and angular
+    * velocity
+@@ -60,8 +80,10 @@ class TyreModel {
+ 
+     const Eigen::Vector3d helper_derivatives = PacejkaModelDerivatives(state, command);
+ 
+-    return {downforce_derivative * mu_y + tyre_downforce * helper_derivatives(0),
+-            tyre_downforce * helper_derivatives(1), tyre_downforce * helper_derivatives(2)};
++    return {lateral_force_scale_ *
++                (downforce_derivative * mu_y + tyre_downforce * helper_derivatives(0)),
++            lateral_force_scale_ * tyre_downforce * helper_derivatives(1),
++            lateral_force_scale_ * tyre_downforce * helper_derivatives(2)};
+   }
+ 
+  private:
+@@ -102,6 +124,7 @@ class TyreModel {
+ 
+   DownforceModel downforce_model_;
+   SlipAngleModel slip_model_;
++  double lateral_force_scale_ = 1.0;
+ };
+ 
+ }  // namespace eufs::vehicle_models

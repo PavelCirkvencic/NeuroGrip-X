@@ -1,0 +1,31 @@
+{
+  "schema_version": 2,
+  "purpose": "Untouched publication holdout for the schema-3 contextual neural Koopman C2 controller. All scenario, model and policy parameters were frozen before any episode in this matrix was run.",
+  "development_split_manifest": "config/c2_development_provenance_v2.json",
+  "target_speed_mps": 3.0,
+  "c2_adaptive_speed_max_mps": 5.0,
+  "c2_model_blend": 0.25,
+  "controllers": [
+    "C0_FIXED",
+    "C2_NEUROGRIP"
+  ],
+  "c2_ensemble_manifest": "runs/eufs_v1/models/c2_v3_koopman_ensemble/ensemble_manifest_closed_loop_calibrated.json",
+  "c2_ensemble_manifest_sha256": "9fb8165d75bb982d100ba45497738b8ff81fec2aa38c7c0c19c5a0d72b4f3183",
+  "scenarios": [
+    {
+      "scenario_id": "publication_holdout_front_split_seed0401",
+      "yaml": "config/scenarios/publication_holdout_front_split_seed0401.yaml",
+      "yaml_sha256": "8f002db62c3348ea8c96560ba7d113375cef3614d9c70d73867046dc39b576ad"
+    },
+    {
+      "scenario_id": "publication_holdout_split_seed0402",
+      "yaml": "config/scenarios/publication_holdout_split_seed0402.yaml",
+      "yaml_sha256": "e5aa4611f158d9775390bffd10327e5399911025265697d6ab8260045645a19d"
+    },
+    {
+      "scenario_id": "publication_holdout_front_split_seed0403",
+      "yaml": "config/scenarios/publication_holdout_front_split_seed0403.yaml",
+      "yaml_sha256": "5aead7b590c0057a2b911b6be3315f49882fe0de7cb3a83872f10229f02815c6"
+    }
+  ]
+}

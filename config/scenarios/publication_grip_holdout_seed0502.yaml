@@ -1,0 +1,23 @@
+schema_version: 1
+scenario_id: publication_grip_holdout_seed0502
+seed: 502
+track: small_track
+base_vehicle:
+  mass_scale: 1.0
+  inertia_scale: 1.0
+  pacejka_A_scale: 1.0
+  pacejka_B_scale: 1.0
+  pacejka_C_scale: 1.0
+actuator:
+  steering_gain: 1.0
+  steering_delay_s: 0.0
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 1.0
+    rear_scale: 1.0
+  - start_s: 12.0
+    start_progress: 0.35
+    front_scale: 0.62
+    rear_scale: 0.80
+sensors:
+  imu_noise_profile: nominal_v1

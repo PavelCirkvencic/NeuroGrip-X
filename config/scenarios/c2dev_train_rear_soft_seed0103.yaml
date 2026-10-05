@@ -1,0 +1,19 @@
+schema_version: 1
+scenario_id: c2dev_train_rear_soft_seed0103
+seed: 103
+track: small_track
+base_vehicle:
+  mass_scale: 1.08
+  inertia_scale: 1.12
+  pacejka_A_scale: 0.98
+  pacejka_B_scale: 0.93
+  pacejka_C_scale: 0.97
+actuator:
+  steering_gain: 0.94
+  steering_delay_s: 0.06
+grip_schedule:
+  - start_s: 0.0
+    front_scale: 0.98
+    rear_scale: 0.65
+sensors:
+  imu_noise_profile: nominal_v1

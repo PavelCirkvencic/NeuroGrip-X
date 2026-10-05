@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "purpose": "Untouched pre-MATLAB C2 final holdout. Scenario and model hashes were fixed before any final-holdout episode was run; do not change this matrix based on its outcomes.",
+  "development_split_manifest": "config/c2_development_splits_v1.json",
+  "target_speed_mps": 4.5,
+  "controllers": [
+    "C0_FIXED",
+    "C1_ORACLE_MU",
+    "C2_NEUROGRIP"
+  ],
+  "c2_ensemble_manifest": "runs/eufs_v1/models/c2_development_ensemble_v1/ensemble_manifest.json",
+  "c2_ensemble_manifest_sha256": "23b33db004530a7a4e7a81b2fb215a58151a3baef84cf2ac539b5a537df5da64",
+  "scenarios": [
+    {
+      "scenario_id": "c2final_holdout_rear_split_seed0301",
+      "yaml": "config/scenarios/c2final_holdout_rear_split_seed0301.yaml",
+      "yaml_sha256": "b320c54712eba9d59c98f9c7ef39e1cb16fe9945042f6948eb964debe2957fbb"
+    },
+    {
+      "scenario_id": "c2final_holdout_rear_split_seed0302",
+      "yaml": "config/scenarios/c2final_holdout_rear_split_seed0302.yaml",
+      "yaml_sha256": "206f2da7e22f72c481831f02756f28932cc19a2e9c32061ff060dd55510d5838"
+    },
+    {
+      "scenario_id": "c2final_holdout_rear_split_seed0303",
+      "yaml": "config/scenarios/c2final_holdout_rear_split_seed0303.yaml",
+      "yaml_sha256": "8158d0080d12671852fbc5c9495e131daa29db902cb6e054e13e3c705598a1c8"
+    }
+  ]
+}

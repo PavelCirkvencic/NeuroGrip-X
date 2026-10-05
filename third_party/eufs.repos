@@ -1,0 +1,29 @@
+repositories:
+  eufs_sim2:
+    type: git
+    url: https://gitlab.com/eufs/public/eufs_sim2.git
+    version: 9f5df79a03725ea7d10542fc2ce8224d90836560
+  eufs_msgs:
+    type: git
+    url: https://gitlab.com/eufs/eufs_msgs.git
+    version: 9e918686c9e9292c613f321e6fd85e3a5d87cd87
+  eufs-gmock-matchers:
+    type: git
+    url: https://gitlab.com/eufs/public/eufs-gmock-matchers.git
+    version: 7ef83d030746c6a31bcf4f888d4121fcf4b7e8a9
+  eufs-logger:
+    type: git
+    url: https://gitlab.com/eufs/public/eufs-logger.git
+    version: 375ea1d8f8885af66809129e444624ba13353fa7
+  state_lib:
+    type: git
+    url: https://gitlab.com/eufs/public/state_lib.git
+    version: ec83a141f188e8a4c39a381f4666485d8cc83e20
+  map_lib:
+    type: git
+    url: https://gitlab.com/eufs/public/map_lib.git
+    version: 1919b36062850c9ba4553d1833a9b517c61c2e86
+  vehicle_models:
+    type: git
+    url: https://gitlab.com/eufs/public/vehicle_models.git
+    version: 3508bec2c3d77e0ff16f08794675d4f7b52479b7

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source": "physical prior: ads-dv-calculated.yaml + Pacejka slope at vx=5 m/s",
+  "front_cornering_stiffness_n_rad": 25940.796,
+  "rear_cornering_stiffness_n_rad": 25940.796,
+  "mass_kg": 300.0,
+  "wheelbase_m": 1.53,
+  "front_fraction": 0.5,
+  "reference_speed_mps": 5.0,
+  "downforce_n": 2950.5,
+  "pacejka_slope_per_rad": 17.584,
+  "data_fit_attempt": "not identifiable: joint fit R^2=0.14 (low excitation, noisy v_y); physical prior used instead"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "purpose": "All scenario identities used for Koopman weight fitting, validation, uncertainty calibration, controller tuning, or closed-loop development before publication holdout v2 was frozen.",
+  "splits": {
+    "train": [
+      "c2dev_train_nominal_seed0101",
+      "c2dev_train_front_soft_seed0102",
+      "c2dev_train_rear_soft_seed0103",
+      "c2dev_train_front_transition_seed0104",
+      "c2dev_train_rear_transition_seed0105",
+      "c2dev_train_high_grip_asym_seed0106"
+    ],
+    "validation": [
+      "c2dev_validation_split_transition_seed0111"
+    ],
+    "calibration": [
+      "c2dev_calibration_rear_loss_seed0121"
+    ],
+    "closed_loop_calibration_and_tuning": [
+      "showcase_front_rear_split_seed0001"
+    ]
+  }
+}

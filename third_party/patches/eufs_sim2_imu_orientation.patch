@@ -1,0 +1,23 @@
+diff --git a/src/plugin/imu_plugin.cpp b/src/plugin/imu_plugin.cpp
+index f05c119..b0ec263 100644
+--- a/src/plugin/imu_plugin.cpp
++++ b/src/plugin/imu_plugin.cpp
+@@ -50,10 +50,14 @@ sensor_msgs::msg::Imu IMUMessageConverter::Convert(
+   msg.angular_velocity.y = state(VSM::_v_pitch) + IMUMessageConverter::ang_drift[1] * t_seconds;
+   msg.angular_velocity.z = state(VSM::_v_yaw) + IMUMessageConverter::ang_drift[2] * t_seconds;
+ 
+-  tf2::Quaternion q;
+-  q.setRPY(state(type::VehicleStateMember::_roll), state(type::VehicleStateMember::_pitch),
+-           state(type::VehicleStateMember::_yaw));
+-  msg.orientation = tf2::toMsg(q);
++  // Orientation is not provided by this IMU model. Publish an identity
++  // quaternion and mark the field unavailable instead of estimating an
++  // unvalidated roll/pitch/yaw. Yaw and yaw rate come from /odom.
++  msg.orientation.x = 0.0;
++  msg.orientation.y = 0.0;
++  msg.orientation.z = 0.0;
++  msg.orientation.w = 1.0;
++  msg.orientation_covariance[0] = -1.0;
+ 
+   return msg;
+ }

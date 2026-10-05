@@ -1,0 +1,34 @@
+{
+  "schema_version": 3,
+  "purpose": "Release holdout: fixed-mu MPC versus causal per-axle neural-Koopman MPC with a controller-independent tracking safety governor.",
+  "development_split_manifest": "config/koopman_grip_mixed_domain_splits_v2.json",
+  "target_speed_mps": 12.0,
+  "target_speed_min_mps": 4.0,
+  "fixed_mu": 0.75,
+  "scalar_mu_utilisation": 0.75,
+  "neurogrip_utilisation": 0.98,
+  "grip_error_margin_scale": 0.5,
+  "controllers": ["C0_FIXED", "C2_NEUROGRIP"],
+  "c2_ensemble_manifest": "runs/eufs_v1/models/c3_koopman_grip_mixed_v2/ensemble_manifest.json",
+  "c2_ensemble_manifest_sha256": "896dc9dd8589238d1b88cee68caf7d53be0c3978bfc00766bec301068e039702",
+  "c2_adaptive_speed_max_mps": 12.0,
+  "c2_model_blend": 0.0,
+  "freeze_note": "The v3 policy was frozen after diagnosing v1/v2 development failures. All v3 YAML/model hashes were fixed before any v3 episode; no outcome-based rerun is permitted.",
+  "scenarios": [
+    {
+      "scenario_id": "griprelease_trackdrive_front_split_seed0821",
+      "yaml": "config/scenarios/griprelease_trackdrive_front_split_seed0821.yaml",
+      "yaml_sha256": "d5afe76c1ad1464f67f83314705b2a78dd00f40b665108f92ba9235eed5f2885"
+    },
+    {
+      "scenario_id": "griprelease_trackdrive_rear_split_seed0822",
+      "yaml": "config/scenarios/griprelease_trackdrive_rear_split_seed0822.yaml",
+      "yaml_sha256": "925ee50da05a02e6e19fb93f6a599f8147d088c720a0d4fa68cf6975d2297bbe"
+    },
+    {
+      "scenario_id": "griprelease_trackdrive_balanced_seed0823",
+      "yaml": "config/scenarios/griprelease_trackdrive_balanced_seed0823.yaml",
+      "yaml_sha256": "5b2775914859d165b6bdf580b234422645ce6d784dec6e4ecfefc95d6216be90"
+    }
+  ]
+}

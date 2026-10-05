@@ -1,0 +1,9 @@
+schema_version: 1
+scenario_id: gripid_train_balanced_low_seed0702
+seed: 702
+track: trackdrive
+base_vehicle: {mass_scale: 1.0, inertia_scale: 1.0, pacejka_A_scale: 1.0, pacejka_B_scale: 1.0, pacejka_C_scale: 1.0}
+actuator: {steering_gain: 1.0, steering_delay_s: 0.0}
+grip_schedule:
+  - {start_s: 0.0, front_scale: 0.70, rear_scale: 0.70}
+sensors: {imu_noise_profile: nominal_v1}
