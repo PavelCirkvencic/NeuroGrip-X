@@ -1,8 +1,12 @@
 # NeuroGrip-X
 
-[![Watch the NeuroGrip-X final holdout replay](artifacts/videos/neurogrip_x_matlab_holdout_v7_poster.png)](artifacts/videos/neurogrip_x_matlab_holdout_v7.mp4)
 
-**[Watch the final 1080p benchmark replay](artifacts/videos/neurogrip_x_matlab_holdout_v7.mp4)**
+
+https://github.com/user-attachments/assets/2de6381b-0af4-43b8-853c-42be63de9655
+
+
+
+
 
 Grip-aware model predictive control for a Formula Student car in simulation.
 NeuroGrip-X estimates front- and rear-axle grip from causal telemetry, adapts a
